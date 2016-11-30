@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wps:ExecuteResponse xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsExecute_response.xsd" service="WPS" version="1.0.0" xml:lang="en-CA" serviceInstance="http://localhost/cgi-bin/wps?service=WPS&amp;request=GetCapabilities&amp;version=1.0.0" statusLocation="http://10.15.36.17/wpsoutputs/pywps-a0784fe0-b31b-11e6-98d1-02000a0f2411.xml">
+    <wps:Process wps:processVersion="1.0.0">
+        <ows:Identifier>aatsrlaketemperature</ows:Identifier>
+        <ows:Title>AATSR Lake Temperature</ows:Title>
+    </wps:Process>
+    <wps:Status creationTime="2016-11-25T15:30:08Z">
+        <wps:ProcessSucceeded>PyWPS Process aatsrlaketemperature successfully calculated</wps:ProcessSucceeded>
+    </wps:Status>
+    <wps:ProcessOutputs>
+        <wps:Output>
+            <ows:Identifier>result_metadata</ows:Identifier>
+            <ows:Title>Metadata XML URL</ows:Title>
+            <wps:Data>
+                <wps:ComplexData mimeType="application/xml">
+<wps:Reference href="http://sb-10-15-36-17.hydro.terradue.int/wpsoutputs/a0784fe0-b31b-11e6-98d1-02000a0f2411/metadata.xml" method="GET" mimeType="application/atom+xml" />                </wps:ComplexData>
+            </wps:Data>
+        </wps:Output>
+    </wps:ProcessOutputs>
+</wps:ExecuteResponse>
