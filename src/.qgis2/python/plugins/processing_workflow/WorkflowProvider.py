@@ -35,6 +35,7 @@ from processing.core.ProcessingLog import ProcessingLog
 from processing_workflow.WorkflowUtils import WorkflowUtils
 from processing_workflow.CreateNewWorkflowAction import CreateNewWorkflowAction
 from processing_workflow.ShareWorkflowAction import ShareWorkflowAction
+from processing_workflow.GetWorkflowAction import GetWorkflowAction
 from processing_workflow.EditWorkflowAction import EditWorkflowAction
 from processing_workflow.DeleteWorkflowAction import DeleteWorkflowAction
 from processing_workflow.Workflow import Workflow
@@ -48,6 +49,7 @@ class WorkflowProvider(AlgorithmProvider):
 		self.activate = False
 		self.actions.append(CreateNewWorkflowAction())
 		self.actions.append(ShareWorkflowAction(self))
+		self.actions.append(GetWorkflowAction(self))
 		self.contextMenuActions = [EditWorkflowAction(), DeleteWorkflowAction()]
 		self.iface = iface
 
@@ -119,3 +121,8 @@ class WorkflowProvider(AlgorithmProvider):
     def openShareWorkflow(self):
 	dlg = ShareWorkflowAction(self)
 	dlg.execute()
+
+    def openGetWorkflow(self):
+	dlg = GetWorkflowAction(self)
+	dlg.execute()
+

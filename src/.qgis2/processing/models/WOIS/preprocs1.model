@@ -1,0 +1,280 @@
+{
+    "values": {
+        "inputs": {
+            "FILE_IN": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 37.95, 
+                            "x": 118.69999999999999
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "FILE_IN", 
+                            "isFolder": false, 
+                            "value": null, 
+                            "ext": null, 
+                            "hidden": false, 
+                            "optional": true, 
+                            "description": "In"
+                        }, 
+                        "class": "processing.core.parameters.ParameterFile"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }
+        }, 
+        "helpContent": {}, 
+        "group": "Tests", 
+        "name": "Pre Processing Sentinel-1", 
+        "algs": {
+            "S1TBXCALIBRATION_1": {
+                "values": {
+                    "name": "S1TBXCALIBRATION_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "pos": {
+                        "values": {
+                            "y": 265.0, 
+                            "x": 273.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "outputsFolded": true, 
+                    "dependencies": [
+                        "S1TBXAPPLYORBITFILE_1"
+                    ], 
+                    "params": {
+                        "createBetaBand": false, 
+                        "externalAuxFile": "", 
+                        "!sourceBands>band": "Amplitude_VV", 
+                        "sourceProduct": {
+                            "values": {
+                                "alg": "S1TBXAPPLYORBITFILE_1", 
+                                "output": "-out"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "outputImageScaleInDb": false, 
+                        "createGammaBand": false, 
+                        "auxFile": 1
+                    }, 
+                    "active": true, 
+                    "consoleName": "s1tbx:calibration", 
+                    "description": "Calibration"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "GDALOGRTRANSLATE_1": {
+                "values": {
+                    "name": "GDALOGRTRANSLATE_1", 
+                    "paramsFolded": true, 
+                    "outputs": {
+                        "OUTPUT": {
+                            "values": {
+                                "description": "output", 
+                                "pos": {
+                                    "values": {
+                                        "y": 595.0, 
+                                        "x": 587.0
+                                    }, 
+                                    "class": "point"
+                                }
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ModelerOutput"
+                        }
+                    }, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 550.0, 
+                            "x": 387.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [
+                        "S1TBXTERRAINCORRECTION_1"
+                    ], 
+                    "params": {
+                        "ZLEVEL": 6.0, 
+                        "BIGTIFF": 0, 
+                        "PROJWIN": null, 
+                        "SDS": false, 
+                        "OUTSIZE": 100.0, 
+                        "OUTSIZE_PERC": true, 
+                        "RTYPE": 5, 
+                        "COMPRESS": 0, 
+                        "NO_DATA": "none", 
+                        "SRS": "EPSG:4037", 
+                        "TILED": false, 
+                        "JPEGCOMPRESSION": 75.0, 
+                        "INPUT": {
+                            "values": {
+                                "alg": "S1TBXTERRAINCORRECTION_1", 
+                                "output": "-out"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "TFW": false, 
+                        "PREDICTOR": 1.0, 
+                        "EXPAND": 0, 
+                        "EXTRA": "-co COMPRESS=LZW"
+                    }, 
+                    "active": true, 
+                    "consoleName": "gdalogr:translate", 
+                    "description": "Translate (convert format)"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "S1TBXAPPLYORBITFILE_1": {
+                "values": {
+                    "name": "S1TBXAPPLYORBITFILE_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "pos": {
+                        "values": {
+                            "y": 178.0, 
+                            "x": 228.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "outputsFolded": true, 
+                    "dependencies": [
+                        "SCRIPTBYPASSINPUTRASTERCHECK_1"
+                    ], 
+                    "params": {
+                        "sourceProduct": {
+                            "values": {
+                                "alg": "SCRIPTBYPASSINPUTRASTERCHECK_1", 
+                                "output": "outputFile"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "orbitType": 0
+                    }, 
+                    "active": true, 
+                    "consoleName": "s1tbx:applyorbitfile", 
+                    "description": "Apply Orbit File"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "SCRIPTBYPASSINPUTRASTERCHECK_1": {
+                "values": {
+                    "name": "SCRIPTBYPASSINPUTRASTERCHECK_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "pos": {
+                        "values": {
+                            "y": 105.83809523809524, 
+                            "x": 207.795238095238
+                        }, 
+                        "class": "point"
+                    }, 
+                    "outputsFolded": true, 
+                    "dependencies": [], 
+                    "params": {
+                        "inputFile": {
+                            "values": {
+                                "name": "FILE_IN"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "script:bypassinputrastercheck", 
+                    "description": "Bypass input raster check"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "S1TBXLINEARTODB_1": {
+                "values": {
+                    "name": "S1TBXLINEARTODB_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "pos": {
+                        "values": {
+                            "y": 356.0, 
+                            "x": 301.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "outputsFolded": true, 
+                    "dependencies": [
+                        "S1TBXCALIBRATION_1"
+                    ], 
+                    "params": {
+                        "!sourceBands>band": "Sigma0_VV", 
+                        "sourceProduct": {
+                            "values": {
+                                "alg": "S1TBXCALIBRATION_1", 
+                                "output": "-out"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "s1tbx:lineartodb", 
+                    "description": "Linear to dB"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "S1TBXTERRAINCORRECTION_1": {
+                "values": {
+                    "name": "S1TBXTERRAINCORRECTION_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "pos": {
+                        "values": {
+                            "y": 444.0, 
+                            "x": 336.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "outputsFolded": true, 
+                    "dependencies": [
+                        "S1TBXLINEARTODB_1"
+                    ], 
+                    "params": {
+                        "applyRadiometricNormalization": false, 
+                        "saveSigmaNought": false, 
+                        "saveLocalIncidenceAngle": false, 
+                        "externalDEMFile": "", 
+                        "saveGammaNought": false, 
+                        "saveProjectedLocalIncidenceAngle": false, 
+                        "externalDEMNoDataValue": 0.0, 
+                        "sourceProduct": {
+                            "values": {
+                                "alg": "S1TBXLINEARTODB_1", 
+                                "output": "-out"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "mapProjection": "", 
+                        "auxFile": 1, 
+                        "saveDEM": false, 
+                        "pixelSpacingInDegree": 99999.9, 
+                        "incidenceAngleForSigma0": 1, 
+                        "demResamplingMethod": 1, 
+                        "externalAuxFile": "", 
+                        "saveSelectedSourceBand": true, 
+                        "nodataValueAtSea": false, 
+                        "demName": 2, 
+                        "pixelSpacingInMeter": 99999.9, 
+                        "incidenceAngleForGamma0": 1, 
+                        "saveBetaNought": false, 
+                        "!sourceBands>band": "Sigma0_VV_db", 
+                        "imgResamplingMethod": 1
+                    }, 
+                    "active": true, 
+                    "consoleName": "s1tbx:terraincorrection", 
+                    "description": "Range Doppler Terrain Correction"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }
+        }
+    }, 
+    "class": "processing.modeler.ModelerAlgorithm.ModelerAlgorithm"
+}

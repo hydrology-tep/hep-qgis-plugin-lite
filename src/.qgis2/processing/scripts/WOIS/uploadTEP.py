@@ -78,7 +78,7 @@ if raster:
           </Polygon>
         </where>
         <box xmlns="http://www.georss.org/georss">""" + ul_y + ' ' + ul_x + ' ' + lr_y + ' ' + lr_x + """</box>
-        <offering xmlns:xsi="http://www.w2.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opengis.net/owc/1.0" code="http://www.opengis.net/spec/owc-atom/1.0/req/png">
+        <offering xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opengis.net/owc/1.0" code="http://www.opengis.net/spec/owc-atom/1.0/req/png">
           <content href="http://""" + host + """/wpsoutputs/""" + uid + """/""" + outputRaster + """?op=OPEN" type="image/""" + ext + """" />
         </offering>
     </entry>
@@ -86,7 +86,7 @@ if raster:
 
     	if quicklook == True:
 	    try:
-		QgsApplication.setPrefixPath('/usr/local', True)
+	        QgsApplication.setPrefixPath("/usr/", True)
 	        QgsApplication.initQgis()
 	        quicklookFile = outputName + '.png'
 	        quicklookFilepath = outputDir + '/' + quicklookFile
@@ -95,9 +95,9 @@ if raster:
 	        baseName = fileInfo.baseName()
 	    	rlayer = QgsRasterLayer(raster, baseName)
 
-		QgsMapLayerRegistry.instance().addMapLayer(rlayer)
+	    	QgsMapLayerRegistry.instance().addMapLayer(rlayer)
 
-	   	w=rlayer.width()
+	    	w=rlayer.width()
 	    	h=rlayer.height()
 	    	img = QImage(QSize(w, h), QImage.Format_ARGB32_Premultiplied)
 	    	color = QColor(255, 255, 255)
@@ -136,7 +136,7 @@ if raster:
 	    	im.putdata(newData)
 
 	    	im.save(quicklookFilepath, "PNG")
-	
+
 	    	metadataStr = metadataStr + """
     <entry>
         <id>http://""" + host + """/wpsoutputs/""" + uid + """/""" + quicklookFile + """</id>
@@ -160,9 +160,19 @@ if raster:
         </offering>
     </entry>
     """
+	    #except IOError:
 	    except Exception as e:
-		pass
-	        
+	        pass
+	        #fe = open(outputDir + '/exception.txt', 'w')
+	     	#exc_type, exc_obj, exc_tb = sys.exc_info()
+	    	#fe.write(str(exc_tb.tb_lineno) + '\n')
+	    	#fe.write(str(exc_type) + '\n')
+	    	#fe.write(str(e) + '\n')
+	    	#fe.close()
+
+	    	#w = QWidget()
+	    	#QMessageBox.critical(w, "Error", "Quicklook generation failed.", QMessageBox.Ok);
+
     	metadataStr = metadataStr + """<identifier xmlns="http://purl.org/dc/elements/1.1/">localdata</identifier>
     <queryTime xmlns="http://purl.org/dc/elements/1.1/">0.0002</queryTime>
     <startIndex xmlns="http://a9.com/-/spec/opensearch/1.1/">1</startIndex>

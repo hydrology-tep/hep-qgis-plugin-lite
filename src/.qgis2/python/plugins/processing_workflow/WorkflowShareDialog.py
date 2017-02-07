@@ -120,9 +120,15 @@ class WorkflowShareDialog(AlgorithmDialogBase):
 						workflowName = f.readline()[6:]
 						wf_name = re.sub('[^0-9a-zA-Z]+', '', workflowName).lower()
 					if wf_name == algName:
-						git_sh = subprocess.Popen([self.home_path + '/.qgis2/python/plugins/github_upload.sh', wf_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+						git_sh = subprocess.Popen([self.home_path + '/.qgis2/python/plugins/github_upload.sh', wf_file, workflowName], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 						git_sh.wait()
-						if os.path.isfile(self.home_path + '/wois-workflow-share/' + filename):
+						if os.path.isfile(self.home_path + '/wois-workflow-share/name_repeated'):
+							QMessageBox.warning(self, 'Share WOIS Workflows', 'Workflow share failed. A workflow with the same name already exists.', QMessageBox.Ok)
+                                                	shutil.rmtree(self.home_path + '/wois-workflow-share')
+						elif os.path.isfile(self.home_path + '/wois-workflow-share/file_repeated'):
+                                                        QMessageBox.warning(self, 'Share WOIS Workflows', 'Workflow share failed. Workflow file already exists.', QMessageBox.Ok)
+                                                        shutil.rmtree(self.home_path + '/wois-workflow-share')
+						elif os.path.isfile(self.home_path + '/wois-workflow-share/' + filename):
 							QMessageBox.information(self, 'Share WOIS Workflows', 'Workflow shared with success.', QMessageBox.Ok)
 							shutil.rmtree(self.home_path + '/wois-workflow-share')
 						else:

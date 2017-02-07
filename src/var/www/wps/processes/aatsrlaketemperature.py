@@ -37,15 +37,15 @@ class Process(WPSProcess):
 	time.sleep(2)
 	uuid = self.pywps.UUID
 	subprocess.Popen(['mkdir', '/var/www/wps/wpsoutputs/' + uuid], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	subprocess.Popen(['chmod', '777', '/var/www/wps/wpsoutputs/' + uuid], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-  
+	subprocess.Popen(['chmod', '775', '/var/www/wps/wpsoutputs/' + uuid], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
 	inputfile0 = self.inParam0.getValue()
 	f = open(inputfile0, 'r')
 	xml = f.read()
 	root = ET.fromstring(xml)
 	for child in root.findall('{http://www.w3.org/2005/Atom}entry'):
 		self.prodURL0 = child.find('{http://www.w3.org/2005/Atom}id').text
-
+    	
 	import socket
 	self.ip = socket.gethostname()
 	import StringIO

@@ -39,6 +39,7 @@ from processing.gui.ToolboxAction import ToolboxAction
 from processing_workflow.ProcessingWorkflowPlugin import ProcessingWorkflowPlugin
 from processing_workflow.WorkflowProvider import WorkflowProvider
 from processing_workflow.ShareWorkflowAction import ShareWorkflowAction
+from processing_workflow.GetWorkflowAction import GetWorkflowAction
 
 #from hep_data import HEPData
 from hep_data_dialog import HEPDataDialog
@@ -50,7 +51,7 @@ class HEPGenDialog():
 	self.dialog = QtGui.QDialog()
 	self.dialog.setWindowTitle("Hydrology-TEP")
 	self.iface=iface
-	self.dialog.setFixedSize(410, 170)
+	self.dialog.setFixedSize(410, 210)
 
 	self.btn1 = QtGui.QPushButton('Get Data from TEP',self.dialog)
 	self.btn1.setIcon(QIcon(os.path.expanduser('~') + '/.qgis2/python/plugins/HEPPlugin/images/dnl.png'))
@@ -76,6 +77,12 @@ class HEPGenDialog():
 	self.btn4.setStyleSheet("padding-left: 10px; padding-top: 2px; padding-bottom: 2px; text-align: left")
 	self.btn4.setFixedWidth(180)
 	self.btn4.clicked.connect(self.shareWorkflow)
+	self.btn5 = QtGui.QPushButton('Get WOIS workflow', self.dialog)
+        self.btn5.setIcon(QIcon(os.path.expanduser('~') + '/.qgis2/python/plugins/HEPPlugin/images/get.png'))
+        self.btn5.move(10,170)
+        self.btn5.setStyleSheet("padding-left: 10px; padding-top: 2px; padding-bottom: 2px; text-align: left")
+        self.btn5.setFixedWidth(180)
+        self.btn5.clicked.connect(self.getWorkflow)
 	self.hep_image = QtGui.QLabel(self.dialog)
 	self.pixmap = QtGui.QPixmap(os.path.expanduser('~') + '/.qgis2/python/plugins/HEPPlugin/images/hep_main_img.png')
 	self.pixmap.scaledToWidth(261)
@@ -103,6 +110,12 @@ class HEPGenDialog():
 	self.dlg = ProcessingWorkflowPlugin(self.iface)
 	self.dlg2 = WorkflowProvider(self.dlg.iface)
 	self.dlg2.openShareWorkflow()
+
+    def getWorkflow(self):
+	self.dialog.hide()
+	self.dlg = ProcessingWorkflowPlugin(self.iface)
+	self.dlg2 = WorkflowProvider(self.dlg.iface)
+	self.dlg2.openGetWorkflow()
 
     def exportModel(self):
 	self.dialog.hide()
