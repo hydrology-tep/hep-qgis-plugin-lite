@@ -26,7 +26,9 @@ This H-TEP Plugin Lite allows the users that own a WOIS Virtual Machine on H-TEP
 **Note:** This step will allow the users to check the outputs in the H-TEP portal after run a job
 
 4. Connect the VPN
-5. Click the plugin button (H-TEP icon) ![alt text](./includes/hep_data_button.png)
+5. Click the plugin button (H-TEP icon)
+
+![alt text](./includes/hep_data_button.png)
 6. Selec the option "Export to model"
 
 ![alt text](./includes/Local_HEP_Plugin.png)
