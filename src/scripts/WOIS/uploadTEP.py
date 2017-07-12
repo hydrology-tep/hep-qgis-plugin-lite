@@ -126,20 +126,20 @@ if raster:
 
 	    	img.save(quicklookFilepath,"png")
 
-	    	im = Image.open(quicklookFilepath)
+	    	#im = Image.open(quicklookFilepath)
 
-	    	datas = im.getdata()
-	    	newData = []
-	    	for item in datas:
-    		    if item[0] == 255 and item[1] == 255 and item[2] == 255:
-        		newData.append((255, 255, 255, 0))
-		    elif item[0] == 0 and item[1] == 0 and item[2] == 0:
-			newData.append((255, 255, 255, 0))
-    		    else:
-        		newData.append(item)
-	    	im.putdata(newData)
+	    	#datas = im.getdata()
+	    	#newData = []
+	    	#for item in datas:
+    		#    if item[0] == 255 and item[1] == 255 and item[2] == 255:
+        	#	newData.append((255, 255, 255, 0))
+		#    elif item[0] == 0 and item[1] == 0 and item[2] == 0:
+		#	newData.append((255, 255, 255, 0))
+    		#    else:
+        	#	newData.append(item)
+	    	#im.putdata(newData)
 
-	    	im.save(quicklookFilepath, "PNG")
+	    	#im.save(quicklookFilepath, "PNG")
 		
 	    	metadataStr = metadataStr + """
     <entry>
@@ -309,20 +309,20 @@ if raster:
 
         		        img.save(quicklookFilepath,"png")
 
-                		im = Image.open(quicklookFilepath)
+                		#im = Image.open(quicklookFilepath)
 
-		                datas = im.getdata()
-        		        newData = []
-                		for item in datas:
-	                	    if item[0] == 255 and item[1] == 255 and item[2] == 255:
-	        	                newData.append((255, 255, 255, 0))
-        	        	    elif item[0] == 0 and item[1] == 0 and item[2] == 0:
-                	        	newData.append((255, 255, 255, 0))
-		                    else:
-        		                newData.append(item)
-                		im.putdata(newData)
+		                #datas = im.getdata()
+        		        #newData = []
+                		#for item in datas:
+	                	#    if item[0] == 255 and item[1] == 255 and item[2] == 255:
+	        	        #        newData.append((255, 255, 255, 0))
+        	        	#    elif item[0] == 0 and item[1] == 0 and item[2] == 0:
+                	        #	newData.append((255, 255, 255, 0))
+		                #    else:
+        		        #        newData.append(item)
+                		#im.putdata(newData)
 
-	                	im.save(quicklookFilepath, "PNG")
+	                	#im.save(quicklookFilepath, "PNG")
 
 			        if remoteDir == '/':
         			        os.system("curl -u '" + user + "':'" + password + "' -X PUT https://store.terradue.com/" + user + "/" + quicklookFile + " -T " + quicklookFilepath)
