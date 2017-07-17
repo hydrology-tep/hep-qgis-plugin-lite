@@ -13,7 +13,7 @@
 ***************************************************************************
 """
 
-__author__ = 'Jo„o Andrade'
+__author__ = 'Jo√£o Andrade'
 __date__ = 'April 2016'
 __copyright__ = '(C) 2016, DEIMOS Engenharia'
 
@@ -398,13 +398,13 @@ class Process(WPSProcess):
 		model_file = root + '\\' + filename
 		exe_scp = home_path + "\\.qgis2\\python\\plugins\\processing\\PSCP.exe"
 		exe_ssh = home_path + "\\.qgis2\\python\\plugins\\processing\\plink.exe"
-		remote_conf_file = "/var/www/wps/processes/" + os.path.splitext(filename)[0] + ".py"
+		remote_conf_file = "/var/www/wps/processes/" + os.path.splitext(filename)[0].lower() + ".py"
 
 		answer = subprocess.call([exe_ssh, '-ssh', username + '@' + ip, '-pw', password, 'test -e ' + pipes.quote(remote_conf_file)])
 		if answer == 0:
 			return 1
 		else:
-			conf_file = home_path + "\\.qgis2\\python\\plugins\\processing\\tmp\\" + os.path.splitext(filename)[0] + ".py"
+			conf_file = home_path + "\\.qgis2\\python\\plugins\\processing\\tmp\\" + os.path.splitext(filename)[0].lower() + ".py"
 			init_file = home_path + "\\.qgis2\\python\\plugins\\processing\\tmp\\__init__.py"
 			self.read_model_file(model_file, conf_file)
 			subprocess.call([exe_scp, '-pw', password, destConfDir + '__init__.py', home_path + "\\.qgis2\\python\\plugins\\processing\\tmp\\"])
@@ -422,13 +422,13 @@ class Process(WPSProcess):
 		model_file = root + '/' + filename
 		exe_scp = "scp"
 		exe_ssh = "ssh"
-		remote_conf_file = "/var/www/wps/processes/" + os.path.splitext(filename)[0] + ".py"
+		remote_conf_file = "/var/www/wps/processes/" + os.path.splitext(filename)[0].lower() + ".py"
 
 		answer = subprocess.call(['sshpass', '-p', password, exe_ssh, username + '@' + ip, 'test -e ' + pipes.quote(remote_conf_file)])
 		if answer == 0:
 			return 1
 		else:
-			conf_file = home_path + "/.qgis2/python/plugins/processing/tmp/" + os.path.splitext(filename)[0] + ".py"
+			conf_file = home_path + "/.qgis2/python/plugins/processing/tmp/" + os.path.splitext(filename)[0].lower() + ".py"
 			init_file = home_path + "/.qgis2/python/plugins/processing/tmp/__init__.py"
 			self.read_model_file(model_file, conf_file)
 			subprocess.call(['sshpass', '-p', password, exe_scp, destConfDir + '__init__.py', home_path + "/.qgis2/python/plugins/processing/tmp/"])
