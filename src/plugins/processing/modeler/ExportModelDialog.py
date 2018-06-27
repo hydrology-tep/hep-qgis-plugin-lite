@@ -257,7 +257,7 @@ class Process(WPSProcess):
 			else:
 				f.write('\n' + '	self.inParam' + str(i) + ' = self.addLiteralInput(identifier="' + in_params[i][1] + '", title="' + in_params[i][2] + '", type=type(0.0), default=' + str(in_params[i][4]) + ')')
 		elif in_params[i][0] == "ParameterString":
-			f.write('\n' + '	self.inParam' + str(i) + ' = self.addLiteralInput(identifier="' + in_params[i][1] + '", title="' + in_params[i][2] + '", type=type(""), default=' + in_params[i][3] + ')')
+			f.write('\n' + '	self.inParam' + str(i) + ' = self.addLiteralInput(identifier="' + in_params[i][1] + '", title="' + in_params[i][2] + '", type=type(""), default="' + in_params[i][3] + '")')
 		elif in_params[i][0] == "ParameterExtent":
 			f.write('\n' + '	self.inParam' + str(i) + ' = self.addLiteralInput(identifier="' + in_params[i][1] + '", title="' + in_params[i][2] + '", type=type(""))')
 		else:
